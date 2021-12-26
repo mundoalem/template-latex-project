@@ -21,15 +21,7 @@ runs:
         cd /tmp/texlive
         wget -qO- "http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet/install-tl-unx.tar.gz" \
           | tar -xz --strip-components=1
-        touch profile.txt
-        echo "selected_scheme scheme-basic" >> profile.txt
-        echo "instopt_letter 0" >> profile.txt
-        echo "tlpdbopt_autobackup 0" >> profile.txt
-        echo "tlpdbopt_desktop_integration 0" >> profile.txt
-        echo "tlpdbopt_file_assocs 0" >> profile.txt
-        echo "tlpdbopt_install_docfiles 0" >> profile.txt
-        echo "tlpdbopt_install_srcfiles 0" >> profile.txt
-        sudo perl install-tl -profile profile.txt \
+        sudo perl install-tl -profile ${{ github.action_path }}/assets/profile.txt \
           --location "http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet"
         rm -r /tmp/texlive
       if: steps.cache-texlive.outputs.cache-hit != 'true'
@@ -43,8 +35,11 @@ runs:
         sudo cpanm -n -q Unicode::GCString
       shell: bash
     - run: |
-        sudo /usr/local/texlive/2021/bin/$(uname -m)-linux/tlmgr update --self --all --reinstall-forcibly-removed
-        sudo /usr/local/texlive/2021/bin/$(uname -m)-linux/tlmgr install \
+        echo "PATH=/usr/local/texlive/2021/bin/$(uname -m)-linux:$PATH" >> $GITHUB_ENV
+      shell: bash
+    - run: |
+        sudo -E tlmgr update --self --all --reinstall-forcibly-removed
+        sudo -E tlmgr install \
           chktex comment enumitem latexindent latexmk lastpage revtex textcase ulem xcolor
-        sudo /usr/local/texlive/2021/bin/$(uname -m)-linux/texhash
+        sudo -E texhash
       shell: bash

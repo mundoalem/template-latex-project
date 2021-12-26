@@ -44,7 +44,7 @@ runs:
       shell: bash
     - run: |
         export PATH="/usr/local/texlive/2021/bin/$(uname -m)-linux:$PATH"
-        tlmgr update --self --all --reinstall-forcibly-removed
-        tlmgr install chktex comment enumitem latexindent latexmk lastpage revtex textcase ulem xcolor
-        texhash
+        sudo tlmgr update --self --all --reinstall-forcibly-removed
+        sudo tlmgr install chktex comment enumitem latexindent latexmk lastpage revtex textcase ulem xcolor
+        sudo texhash
       shell: bash

@@ -41,6 +41,7 @@
 		"terminal.integrated.defaultProfile.linux": "fish"
 	},
 	"extensions": [
+		"eamodio.gitlens",
 		"james-yu.latex-workshop"
 	],
 	"features": {},

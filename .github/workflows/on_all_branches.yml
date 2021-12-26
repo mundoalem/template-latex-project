@@ -15,8 +15,7 @@ jobs:
       - uses: ./.github/actions/setup-texlive
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
-          cache: pip
+          python-version: 3.9
       - run: |
           pip3 install invoke==1.6.0
           invoke lint

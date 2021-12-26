@@ -19,4 +19,5 @@ jobs:
       - run: |
           pip3 install invoke==1.6.0
       - run: |
+          export PATH="/usr/local/texlive/2021/bin/$(uname -m)-linux:$PATH"
           invoke lint

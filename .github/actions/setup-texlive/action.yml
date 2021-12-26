@@ -7,6 +7,3 @@ runs:
     - run: |
         sudo ${{ github.action_path }}/assets/setup.sh
       shell: bash
-    - run: |
-        echo "PATH=/usr/local/texlive/2021/bin/$(uname -m)-linux:$PATH" >> $GITHUB_ENV
-      shell: bash

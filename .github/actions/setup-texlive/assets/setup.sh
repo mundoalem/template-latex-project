@@ -19,7 +19,7 @@ apt-get clean autoclean -y
 mkdir /tmp/texlive
 cd /tmp/texlive
 wget -qO- "${TEXLIVE_MIRROR}/install-tl-unx.tar.gz" | tar -xz --strip-components=1
-perl install-tl -profile profile.txt --location $TEXLIVE_MIRROR
+perl install-tl -profile texlive.profile --location $TEXLIVE_MIRROR
 cpanm -n -q Log::Log4perl
 cpanm -n -q XString
 cpanm -n -q Log::Dispatch::File

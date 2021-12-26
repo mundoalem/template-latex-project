@@ -21,8 +21,8 @@ runs:
         cd /tmp/texlive
         wget -qO- "http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet/install-tl-unx.tar.gz" \
           | tar -xz --strip-components=1
-        selected_scheme scheme-basic
         touch profile.txt
+        echo "selected_scheme scheme-basic" >> profile.txt
         echo "instopt_letter 0" >> profile.txt
         echo "tlpdbopt_autobackup 0" >> profile.txt
         echo "tlpdbopt_desktop_integration 0" >> profile.txt

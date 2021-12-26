@@ -3,6 +3,9 @@
 export PATH="/usr/local/texlive/2021/bin/$(uname -m)-linux:$PATH"
 export TEXLIVE_MIRROR="http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet"
 
+# Arguments
+TEXLIVE_PROFILE_PATH="$1"
+
 # Install necessary system dependencies
 apt-get update
 apt-get -y install --no-install-recommends \
@@ -19,7 +22,7 @@ apt-get clean autoclean -y
 mkdir /tmp/texlive
 cd /tmp/texlive
 wget -qO- "${TEXLIVE_MIRROR}/install-tl-unx.tar.gz" | tar -xz --strip-components=1
-perl install-tl -profile texlive.profile --location $TEXLIVE_MIRROR
+perl install-tl -profile "$TEXLIVE_PROFILE_PATH" --location "$TEXLIVE_MIRROR"
 cpanm -n -q Log::Log4perl
 cpanm -n -q XString
 cpanm -n -q Log::Dispatch::File

@@ -5,5 +5,5 @@ runs:
   using: "composite"
   steps:
     - run: |
-        sudo ${{ github.action_path }}/assets/setup.sh
+        sudo ${{ github.action_path }}/assets/setup.sh "${{ github.action_path }}/assets/texlive.profile"
       shell: bash

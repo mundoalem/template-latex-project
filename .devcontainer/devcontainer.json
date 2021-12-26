@@ -1,0 +1,49 @@
+{
+	"name": "LaTeX",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+	"settings": {
+		"editor.formatOnSave": true,
+		"editor.rulers": [
+			80,
+			120
+		],
+		"files.associations": {
+			"*.tex": "latex",
+		},
+		"latex-workshop.bibtex-format.sort.enabled": true,
+		"latex-workshop.check.duplicatedLabels.enabled": true,
+		"latex-workshop.chktex.enabled": true,
+		"latex-workshop.latex.autoBuild.run": "never",
+		"latex-workshop.latex.autoClean.run": "onBuilt",
+		"latex-workshop.latex.clean.subfolder.enabled": true,
+		"latex-workshop.synctex.synctexjs.enabled": false,
+		"latex-workshop.latexindent.args": [
+			"-w",
+			"-c",
+			"%DIR%/",
+			"%TMPFILE%",
+			"-y=onlyOneBackUp:1,removeTrailingWhitespace:1"
+		],
+		"terminal.integrated.profiles.linux": {
+			"bash": {
+				"path": "/usr/bin/bash"
+			},
+			"fish": {
+				"path": "/usr/bin/fish"
+			},
+			"zsh": {
+				"path": "/usr/bin/zsh"
+			}
+		},
+		"terminal.integrated.defaultProfile.linux": "fish"
+	},
+	"extensions": [
+		"james-yu.latex-workshop"
+	],
+	"features": {},
+	"postCreateCommand": "",
+	"remoteUser": "vscode"
+}

@@ -1,0 +1,7 @@
+QuoteStyle = Logical
+TabSize = 4
+
+CmdLine
+{
+    -wall -n1 -n8 -n22 -n30 -n44 -e16 -q
+}

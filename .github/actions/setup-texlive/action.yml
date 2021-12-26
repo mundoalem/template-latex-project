@@ -1,0 +1,41 @@
+name: Setup LaTeX
+description: Setup LaTeX.
+
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        apt-get update
+        apt-get -y install --no-install-recommends \
+          build-essential ca-certificates tzdata gnupg cpanminus libc6-dev
+        apt-get autoremove -y
+        apt-get clean autoclean -y
+      shell: bash
+    - uses: actions/cache@v2
+      id: cache-texlive
+      with:
+        path: /usr/local/texlive
+        key: ${{ runner.os }}-texlive-${{ hashFiles('/usr/local/texlive/2021/release-texlive.txt') }}
+    - run: |
+        mkdir /tmp/texlive
+        cd /tmp/texlive
+        wget -qO- "http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet/install-tl-unx.tar.gz" \
+          | tar -xz --strip-components=1
+        perl install-tl -profile assets/profile.txt \
+          --location "http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet"
+        rm -r /tmp/texlive
+      if: steps.cache-texlive.outputs.cache-hit != 'true'
+      shell: bash
+    - run: |
+        cpanm -n -q Log::Log4perl
+        cpanm -n -q XString
+        cpanm -n -q Log::Dispatch::File
+        cpanm -n -q YAML::Tiny
+        cpanm -n -q File::HomeDir
+        cpanm -n -q Unicode::GCString
+      shell: bash
+    - run: |
+        tlmgr update --self --all --reinstall-forcibly-removed
+        tlmgr install chktex comment enumitem latexindent latexmk lastpage revtex textcase ulem xcolor
+        texhash
+      shell: bash

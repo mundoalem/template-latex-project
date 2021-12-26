@@ -1,0 +1,72 @@
+% This file is part of template-latex-project.
+%
+% template-latex-project is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% template-latex-project is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with template-latex-project. If not, see <https://www.gnu.org/licenses/>.
+
+\documentclass[aps,prl,twocolumn,groupedaddress]{revtex4-2}
+
+% ---------------------------------------------------------------------------------------------------------------------
+% Packages
+% ---------------------------------------------------------------------------------------------------------------------
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{layout}
+\usepackage{textcomp}
+\usepackage{ulem}
+\usepackage{xcolor}
+
+% ---------------------------------------------------------------------------------------------------------------------
+% Preamble
+% ---------------------------------------------------------------------------------------------------------------------
+
+\input{content/preamble}
+
+% ---------------------------------------------------------------------------------------------------------------------
+% Body
+% ---------------------------------------------------------------------------------------------------------------------
+
+\begin{document}
+
+\title{Example Paper}
+
+\author{Egon E. Braun Filho}
+\email[]{egon@mundoalem.io}
+\homepage[]{https://www.mundoalem.io/}
+\thanks{My family.}
+\affiliation{Mundoalem}
+
+\date{\today}
+
+\begin{abstract}
+	This in an example paper written in \LaTeX{} and following the conventions set by \emph{revtex}. Source files are
+	available in the following git repository: \url{https://github.com/mundoalem/template-latex-project}.
+\end{abstract}
+
+\maketitle
+
+\input{content/sections}
+
+\input{content/appendices}
+
+\bibliography{content/references}
+
+\end{document}

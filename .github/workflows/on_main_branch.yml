@@ -1,0 +1,20 @@
+name: Workflow - On Main Branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-20.04
+    name: Lint
+    steps:
+      - uses: actions/checkout@v2
+
+  build:
+    runs-on: ubuntu-20.04
+    name: Build
+    needs: [test, scan]
+    steps:
+      - uses: actions/checkout@v2

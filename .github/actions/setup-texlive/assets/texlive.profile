@@ -1,8 +1,14 @@
 selected_scheme scheme-basic
+instopt_adjustpath 1
+instopt_adjustrepo 1
 instopt_letter 0
+instopt_portable 0
+instopt_write18_restricted 1
 tlpdbopt_autobackup 0
 tlpdbopt_desktop_integration 0
 tlpdbopt_file_assocs 0
+tlpdbopt_generate_updmap 0
 tlpdbopt_install_docfiles 0
 tlpdbopt_install_srcfiles 0
-instopt_adjustpath 1
+tlpdbopt_post_code 1
+tlpdbopt_sys_bin /usr/local/bin

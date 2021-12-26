@@ -18,4 +18,5 @@ jobs:
           python-version: 3.9
       - run: |
           pip3 install invoke==1.6.0
+      - run: |
           invoke lint

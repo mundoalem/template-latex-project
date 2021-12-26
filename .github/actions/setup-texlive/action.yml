@@ -43,8 +43,9 @@ runs:
         sudo cpanm -n -q Unicode::GCString
       shell: bash
     - run: |
-        export PATH="/usr/local/texlive/2021/bin/$(uname -m)-linux:$PATH"
+        sudo echo 'PATH="/usr/local/texlive/2021/bin/$(uname -m)-linux:$PATH"' >> /root/.profile
         sudo tlmgr update --self --all --reinstall-forcibly-removed
-        sudo tlmgr install chktex comment enumitem latexindent latexmk lastpage revtex textcase ulem xcolor
+        sudo tlmgr install \
+          chktex comment enumitem latexindent latexmk lastpage revtex textcase ulem xcolor
         sudo texhash
       shell: bash

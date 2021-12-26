@@ -44,6 +44,7 @@ tlmgr install   \
     ulem        \
     xcolor
 texhash 
+tlmgr path add
 
 # Clean up
 rm -r /tmp/texlive

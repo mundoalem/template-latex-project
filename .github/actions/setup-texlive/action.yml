@@ -5,11 +5,11 @@ runs:
   using: "composite"
   steps:
     - run: |
-        apt-get update
-        apt-get -y install --no-install-recommends \
+        sudo apt-get update
+        sudo apt-get -y install --no-install-recommends \
           build-essential ca-certificates tzdata gnupg cpanminus libc6-dev
-        apt-get autoremove -y
-        apt-get clean autoclean -y
+        sudo apt-get autoremove -y
+        sudo apt-get clean autoclean -y
       shell: bash
     - uses: actions/cache@v2
       id: cache-texlive

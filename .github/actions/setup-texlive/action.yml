@@ -21,18 +21,18 @@ runs:
         cd /tmp/texlive
         wget -qO- "http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet/install-tl-unx.tar.gz" \
           | tar -xz --strip-components=1
-        perl install-tl -profile assets/profile.txt \
+        sudo perl install-tl -profile assets/profile.txt \
           --location "http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet"
         rm -r /tmp/texlive
       if: steps.cache-texlive.outputs.cache-hit != 'true'
       shell: bash
     - run: |
-        cpanm -n -q Log::Log4perl
-        cpanm -n -q XString
-        cpanm -n -q Log::Dispatch::File
-        cpanm -n -q YAML::Tiny
-        cpanm -n -q File::HomeDir
-        cpanm -n -q Unicode::GCString
+        sudo cpanm -n -q Log::Log4perl
+        sudo cpanm -n -q XString
+        sudo cpanm -n -q Log::Dispatch::File
+        sudo cpanm -n -q YAML::Tiny
+        sudo cpanm -n -q File::HomeDir
+        sudo cpanm -n -q Unicode::GCString
       shell: bash
     - run: |
         tlmgr update --self --all --reinstall-forcibly-removed

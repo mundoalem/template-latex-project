@@ -21,7 +21,15 @@ runs:
         cd /tmp/texlive
         wget -qO- "http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet/install-tl-unx.tar.gz" \
           | tar -xz --strip-components=1
-        sudo perl install-tl -profile assets/profile.txt \
+        selected_scheme scheme-basic
+        touch profile.txt
+        echo "instopt_letter 0" >> profile.txt
+        echo "tlpdbopt_autobackup 0" >> profile.txt
+        echo "tlpdbopt_desktop_integration 0" >> profile.txt
+        echo "tlpdbopt_file_assocs 0" >> profile.txt
+        echo "tlpdbopt_install_docfiles 0" >> profile.txt
+        echo "tlpdbopt_install_srcfiles 0" >> profile.txt
+        sudo perl install-tl -profile profile.txt \
           --location "http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet"
         rm -r /tmp/texlive
       if: steps.cache-texlive.outputs.cache-hit != 'true'
@@ -35,6 +43,7 @@ runs:
         sudo cpanm -n -q Unicode::GCString
       shell: bash
     - run: |
+        export PATH="/usr/local/texlive/2021/bin/$(uname -m)-linux:$PATH"
         tlmgr update --self --all --reinstall-forcibly-removed
         tlmgr install chktex comment enumitem latexindent latexmk lastpage revtex textcase ulem xcolor
         texhash

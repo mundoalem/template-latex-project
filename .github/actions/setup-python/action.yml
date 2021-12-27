@@ -1,0 +1,12 @@
+name: Setup Python
+description: Setup Python.
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - run: |
+        pip3 install invoke==1.6.0
+      shell: bash

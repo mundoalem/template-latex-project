@@ -10,14 +10,14 @@ jobs:
     runs-on: ubuntu-20.04
     name: Build
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup-texlive
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - run: |
-          pip3 install invoke==1.6.0
-      - run: |
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup TexLive
+        uses: ./.github/actions/setup-texlive
+      - name: Setup Python
+        uses: ./.github/actions/setup-python
+      - name: Build
+        run: |
           invoke build
 
   release:
@@ -25,20 +25,23 @@ jobs:
     name: Release
     needs: build
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup-texlive
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - run: |
-          pip3 install invoke==1.6.0
-      - run: |
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup TexLive
+        uses: ./.github/actions/setup-texlive
+      - name: Setup Python
+        uses: ./.github/actions/setup-python
+      - name: Release
+        run: |
           invoke release
-      - run: |
+      - name: Get Version From Tag
+        run: |
           echo "::set-output name=version::${GITHUB_REF#refs/*/}"
-      - uses: softprops/action-gh-release@v1
+      - name: Upload Artifact to Release
+        uses: softprops/action-gh-release@v1
         with:
-          name: ${{ steps.vars.outputs.version }}
+          name: document-${{ steps.vars.outputs.version }}.zip
+          fail_on_unmatched_files: true
           files: dist/*.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

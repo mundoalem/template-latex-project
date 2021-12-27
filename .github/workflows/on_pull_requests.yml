@@ -11,10 +11,30 @@ jobs:
     name: Lint
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup-texlive
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - run: |
+          pip3 install invoke==1.6.0
+      - run: |
+          invoke lint
   
   build:
     runs-on: ubuntu-20.04
     name: Build
-    needs: [test, scan]
+    needs: [lint]
     steps:
       - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup-texlive
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - run: |
+          pip3 install invoke==1.6.0
+      - run: |
+          invoke build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: document
+          path: dist/*.pdf

@@ -10,10 +10,14 @@ jobs:
     runs-on: ubuntu-20.04
     name: Build
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup-texlive
-      - uses: ./.github/actions/setup-python
-      - run: |
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup TexLive
+        uses: ./.github/actions/setup-texlive
+      - name: Setup Python
+        uses: ./.github/actions/setup-python
+      - name: Build
+        run: |
           invoke build
 
   release:
@@ -21,14 +25,20 @@ jobs:
     name: Release
     needs: build
     steps:
-      - uses: actions/checkout@v2
-      - uses: ./.github/actions/setup-texlive
-      - uses: ./.github/actions/setup-python
-      - run: |
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup TexLive
+        uses: ./.github/actions/setup-texlive
+      - name: Setup Python
+        uses: ./.github/actions/setup-python
+      - name: Release
+        run: |
           invoke release
-      - run: |
+      - name: Get Version From Tag
+        run: |
           echo "::set-output name=version::${GITHUB_REF#refs/*/}"
-      - uses: softprops/action-gh-release@v1
+      - name: Upload Artifact to Release
+        uses: softprops/action-gh-release@v1
         with:
           name: document-${{ steps.vars.outputs.version }}.zip
           fail_on_unmatched_files: true

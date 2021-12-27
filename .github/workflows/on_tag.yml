@@ -30,7 +30,7 @@ jobs:
           echo "::set-output name=version::${GITHUB_REF#refs/*/}"
       - uses: softprops/action-gh-release@v1
         with:
-          name: document-${{ steps.vars.outputs.version }}.pdf
+          name: document-${{ steps.vars.outputs.version }}.zip
           fail_on_unmatched_files: true
           files: dist/*.pdf
         env:

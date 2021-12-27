@@ -28,5 +28,5 @@ jobs:
           invoke build
       - uses: actions/upload-artifact@v2
         with:
-          name: document
+          name: document.zip
           path: build/*.pdf

@@ -19,6 +19,11 @@ jobs:
       - name: Build
         run: |
           invoke build
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts
+          path: build/*.pdf
 
   release:
     runs-on: ubuntu-20.04
@@ -27,20 +32,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup TexLive
-        uses: ./.github/actions/setup-texlive
       - name: Setup Python
         uses: ./.github/actions/setup-python
+      - uses: actions/download-artifact@v2
+        with:
+          name: build-artifacts
+          path: build/
       - name: Release
         run: |
           invoke release
       - name: Get Version From Tag
         run: |
-          echo "::set-output name=version::${GITHUB_REF#refs/*/}"
+          version=`echo $GITHUB_REF | cut -d/ -f3`
+          echo "::set-output name=version::$version"
       - name: Upload Artifact to Release
         uses: softprops/action-gh-release@v1
         with:
-          name: document-${{ steps.vars.outputs.version }}.zip
+          name: ${{ steps.vars.outputs.version }}
           fail_on_unmatched_files: true
           files: dist/*.pdf
         env:

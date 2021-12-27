@@ -95,6 +95,6 @@ def lint(c, file_path=None):
         c.run(f"chktex {f}")
 
 
-@task(build)
-def release(c, major=False, minor=False, patch=True):
+@task
+def release(c):
     copy(f"{BUILD_DIR}/{MAIN_FILE.stem}.pdf", f"{DIST_DIR}/")

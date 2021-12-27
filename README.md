@@ -66,6 +66,11 @@ $ invoke format
 $ invoke lint
 ```
 
+The content of the document starts in the `document.tex`. That file will set the initial document information such the
+title, date, authors, etc. Appendices, sections, figures and etc can be found in the `content` directory.
+
+This template was designed for academic papers but can be easily modified for any kind of works.
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your environment:

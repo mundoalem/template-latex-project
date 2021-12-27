@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-export PATH="/usr/local/texlive/2021/bin/$(uname -m)-linux:$PATH"
 export TEXLIVE_MIRROR="http://ctan.math.utah.edu/ctan/tex-archive/systems/texlive/tlnet"
+export TEXLIVE_VERSION="2021"
+export PATH="/usr/local/texlive/${TEXLIVE_VERSION}/bin/$(uname -m)-linux:$PATH"
 
 # Arguments
 TEXLIVE_PROFILE_PATH="$1"
@@ -43,7 +44,7 @@ tlmgr install   \
     textcase    \
     ulem        \
     xcolor
-texhash 
+texhash
 tlmgr path add
 
 # Clean up

@@ -12,11 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup-texlive
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - run: |
-          pip3 install invoke==1.6.0
+      - uses: ./.github/actions/setup-python
       - run: |
           invoke build
 
@@ -27,18 +23,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/setup-texlive
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - run: |
-          pip3 install invoke==1.6.0
+      - uses: ./.github/actions/setup-python
       - run: |
           invoke release
       - run: |
           echo "::set-output name=version::${GITHUB_REF#refs/*/}"
       - uses: softprops/action-gh-release@v1
         with:
-          name: ${{ steps.vars.outputs.version }}
+          name: document-${{ steps.vars.outputs.version }}.pdf
+          fail_on_unmatched_files: true
           files: dist/*.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
